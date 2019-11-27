@@ -1,18 +1,32 @@
-# Docker for ancient Quartus versions
+# Note
+
+This was forked from corna/quartus-docker and adapted to use for the Quartus Programmer.
+I am using it for programming the Apollo Team's Vampire V4.
+
+# Docker for Quartus Programmer 13.1
 
 Needs [x11docker](https://github.com/mviereck/x11docker). Additional packages [may be required](https://github.com/mviereck/x11docker#dependencies).
 
-### Installation
-
-Download a Quartus tarball and put it in a folder (which will become the image's home folder), then:
+### Building the container
 
 ```
-cd <this folder>
 docker build -t quartus .
-x11docker --clipboard --home --homedir <image home dir> -- "--device=/dev/bus/usb/ --network none" quartus install_quartus
 ```
 
-The Quartus installer should start: install it somewhere in the home folder.
+This should:
+
+1. Download the installer
+2. Run the installer
+3. move the installed files to the correct final place
+4. build the container
+
+You can also specify an alternate url for the installer:
+
+```
+docker build -t quartus --build-arg url=http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/QuartusProgrammerSetup-13.1.0.162.run .
+```
+
+### Setting udev rules
 
 Don't forget to add the udev rules (on the host) to allow Quartus access to the USB programmers; for example, this file
 
@@ -30,15 +44,11 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="09fb", ATTR{idProduct}=="6810", MODE="0666"
 put in /etc/udev/rules.d/50-usb-blaster.rules gives full access to the USB-Blaster devices to any user.
 Use `udevadm control --reload` (and plug again the device if already plugged) to refresh the permissions.
 
-### Run
+### Running the container
 
 ```
-x11docker --clipboard --home --homedir <image home dir> -- "--device=/dev/bus/usb/ --network none" quartus <install path>/quartus/bin/quartus
+x11docker --clipboard --home=/path/to/my/jitfiles -- "--device=/dev/bus/usb/ --network none" quartus
 ```
 
-For example, with Quartus 13.0 Service Pack 1 and the default installation path:
-
-```
-x11docker --clipboard --home --homedir <image home dir> -- "--device=/dev/bus/usb/ --network none" quartus ~/altera/13.0sp1/quartus/bin/quartus
-```
+This should run Quartus programmer, and you should have access to your USB Blaster, and to your `.jic` files in `/path/to/my/jitfiles`.
 
