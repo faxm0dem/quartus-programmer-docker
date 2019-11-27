@@ -3,6 +3,13 @@
 This was forked from corna/quartus-docker and adapted to use for the Quartus Programmer.
 I am using it for programming the Apollo Team's Vampire V4.
 
+# Why docker?
+
+Two reasons:
+
+1. Quartus needs outdated 32bit libraries like libpng12 which most of us don't have access to on our GNU/Linux distributions without crippling them unnecessarily
+2. Containers give extra security for instance by not exposing local filesystems to the running app
+
 # Docker for Quartus Programmer 13.1
 
 Needs [x11docker](https://github.com/mviereck/x11docker). Additional packages [may be required](https://github.com/mviereck/x11docker#dependencies).
