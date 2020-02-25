@@ -10,13 +10,14 @@ RUN echo "deb http://security.ubuntu.com/ubuntu xenial-security main" > /etc/apt
 	dpkg --add-architecture i386 && \
 	apt-get update && \
 	apt-get -y upgrade && \
-	apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386 libxft2:i386 libxext6:i386 libsm6:i386 libpng12-0:i386 libpng12-0 wget
-RUN wget $url -O /installer
-RUN chmod +x /installer
-RUN yes | /installer
-RUN rm /installer
-RUN mv /y /usr/local/altera
-RUN apt-get remove wget -y
+	apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386 libxft2:i386 libxext6:i386 libsm6:i386 libpng12-0:i386 libpng12-0 wget && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
+RUN wget $url -O /installer && \
+	chmod +x /installer && \
+	(yes | /installer) && \
+	rm /installer && \
+	mv /y /usr/local/altera
 
 # # Do you accept this license? [y/n]:
 # ----------------------------------------------------------------------------
