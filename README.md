@@ -10,7 +10,7 @@ Two reasons:
 1. Quartus needs outdated 32bit libraries like libpng12 which most of us don't have access to on our GNU/Linux distributions without crippling them unnecessarily
 2. Containers give extra security for instance by not exposing local filesystems to the running app
 
-# Docker for Quartus Programmer 13.1
+# Docker for Quartus Programmer 20.1
 
 Needs [x11docker](https://github.com/mviereck/x11docker). Additional packages [may be required](https://github.com/mviereck/x11docker#dependencies).
 
@@ -30,7 +30,8 @@ This should:
 You can also specify an alternate url for the installer:
 
 ```
-docker build -t quartus --build-arg url=http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/QuartusProgrammerSetup-13.1.0.162.run .
+# Will install the programmer from an alternate url
+docker build -t quartus --build-arg url=http://download.altera.com/akdlm/software/acdsinst/20.1std/711/ib_installers/QuartusProgrammerSetup-20.1.0.711-linux.run .
 ```
 
 ### Setting udev rules
