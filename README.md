@@ -60,3 +60,8 @@ x11docker --clipboard --home=/path/to/my/jitfiles -- "--device=/dev/bus/usb/ --n
 
 This should run Quartus programmer, and you should have access to your USB Blaster, and to your `.jic` files in `/path/to/my/jitfiles`.
 
+If the Quartus GUI doesn't run and you see the following error in the log, try runing x11docker with the `--hostdisplay` flag:
+
+```
+xf86OpenConsole: Cannot open virtual console 12 (Permission denied)
+```
