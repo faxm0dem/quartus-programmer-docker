@@ -7,7 +7,7 @@ I am using it for programming the Apollo Team's Vampire V4.
 
 Two reasons:
 
-1. Quartus needs outdated 32bit libraries like libpng12 which most of us don't have access to on our GNU/Linux distributions without crippling them unnecessarily
+1. The Linux version of Quartus needs libraries that are often outdated at the time of flashing
 2. Containers give extra security for instance by not exposing local filesystems to the running app
 
 # Docker for Quartus Programmer 20.1
